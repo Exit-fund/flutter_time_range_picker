@@ -104,6 +104,16 @@ showTimeRangePicker({
   /// TextStyle of the currently moving time text
   TextStyle activeTimeTextStyle,
 
+  /// TextStyle of From text
+  TextStyle fromTextStyle = const TextStyle(
+    color: Colors.black,
+  ),
+
+  // TextStyle of To text
+  TextStyle toTextStyle = const TextStyle(
+    color: Colors.black,
+  ),
+
   /// hide the time texts
   bool hideTimes = false,
 
@@ -151,6 +161,8 @@ showTimeRangePicker({
         labelStyle: labelStyle,
         timeTextStyle: timeTextStyle,
         activeTimeTextStyle: activeTimeTextStyle,
+        fromTextStyle: fromTextStyle,
+        toTextStyle: toTextStyle,
         hideTimes: hideTimes,
         use24HourFormat: use24HourFormat,
       ));
@@ -211,6 +223,9 @@ class TimeRangePicker extends StatefulWidget {
   final TextStyle timeTextStyle;
   final TextStyle activeTimeTextStyle;
 
+  final TextStyle fromTextStyle;
+  final TextStyle toTextStyle;
+
   final bool hideTimes;
   final bool hideButtons;
   final bool use24HourFormat;
@@ -248,6 +263,8 @@ class TimeRangePicker extends StatefulWidget {
     this.labelStyle,
     this.timeTextStyle,
     this.activeTimeTextStyle,
+    this.fromTextStyle,
+    this.toTextStyle,
     use24HourFormat,
     hideTimes,
     hideButtons,
@@ -639,12 +656,16 @@ class _TimeRangePickerState extends State<TimeRangePicker>
         children: [
           Column(
             children: [
-              Text(widget.fromText, style: TextStyle(color: activeColor)),
+              Text(
+                widget.fromText,
+                style: widget.fromTextStyle,
+              ),
               Text(
                 _startTime != null
-                    ? MaterialLocalizations.of(context).formatTimeOfDay(
-                        _startTime,
-                        alwaysUse24HourFormat: widget.use24HourFormat)
+                    ? MaterialLocalizations.of(context)
+                        .formatTimeOfDay(_startTime,
+                            alwaysUse24HourFormat: widget.use24HourFormat)
+                        .toLowerCase()
                     : "-",
                 style: _activeTime == ActiveTime.Start
                     ? widget.activeTimeTextStyle ??
@@ -661,11 +682,13 @@ class _TimeRangePickerState extends State<TimeRangePicker>
             ],
           ),
           Column(children: [
-            Text(widget.toText, style: TextStyle(color: activeColor)),
+            Text(widget.toText, style: widget.toTextStyle),
             Text(
               _endTime != null
-                  ? MaterialLocalizations.of(context).formatTimeOfDay(_endTime,
-                      alwaysUse24HourFormat: widget.use24HourFormat)
+                  ? MaterialLocalizations.of(context)
+                      .formatTimeOfDay(_endTime,
+                          alwaysUse24HourFormat: widget.use24HourFormat)
+                      .toLowerCase()
                   : "-",
               style: _activeTime == ActiveTime.End
                   ? widget.activeTimeTextStyle ??
