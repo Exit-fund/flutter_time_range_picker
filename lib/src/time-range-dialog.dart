@@ -114,12 +114,12 @@ showTimeRangePicker({
     color: Colors.black,
   ),
 
-  /// TextStyle of From text
+  /// TextStyle of submit text
   TextStyle submitTextStyle = const TextStyle(
     color: Colors.black,
   ),
 
-  // TextStyle of To text
+  // TextStyle of cancel text
   TextStyle cancelTextStyle = const TextStyle(
     color: Colors.black,
   ),
@@ -173,6 +173,8 @@ showTimeRangePicker({
         activeTimeTextStyle: activeTimeTextStyle,
         fromTextStyle: fromTextStyle,
         toTextStyle: toTextStyle,
+        submitTextStyle: submitTextStyle,
+        cancelTextStyle: cancelTextStyle,
         hideTimes: hideTimes,
         use24HourFormat: use24HourFormat,
       ));
