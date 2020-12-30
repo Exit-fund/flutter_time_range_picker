@@ -114,6 +114,16 @@ showTimeRangePicker({
     color: Colors.black,
   ),
 
+  /// TextStyle of From text
+  TextStyle submitTextStyle = const TextStyle(
+    color: Colors.black,
+  ),
+
+  // TextStyle of To text
+  TextStyle cancelTextStyle = const TextStyle(
+    color: Colors.black,
+  ),
+
   /// hide the time texts
   bool hideTimes = false,
 
@@ -226,6 +236,9 @@ class TimeRangePicker extends StatefulWidget {
   final TextStyle fromTextStyle;
   final TextStyle toTextStyle;
 
+  final TextStyle submitTextStyle;
+  final TextStyle cancelTextStyle;
+
   final bool hideTimes;
   final bool hideButtons;
   final bool use24HourFormat;
@@ -265,6 +278,8 @@ class TimeRangePicker extends StatefulWidget {
     this.activeTimeTextStyle,
     this.fromTextStyle,
     this.toTextStyle,
+    this.submitTextStyle,
+    this.cancelTextStyle,
     use24HourFormat,
     hideTimes,
     hideButtons,
@@ -556,11 +571,17 @@ class _TimeRangePickerState extends State<TimeRangePicker>
       ButtonBar(
         children: <Widget>[
           FlatButton(
-            child: Text(localizations.cancelButtonLabel),
+            child: Text(
+              localizations.cancelButtonLabel,
+              style: widget.cancelTextStyle,
+            ),
             onPressed: _cancel,
           ),
           FlatButton(
-            child: Text(localizations.okButtonLabel),
+            child: Text(
+              localizations.okButtonLabel,
+              style: widget.submitTextStyle,
+            ),
             onPressed: _submit,
           ),
         ],
