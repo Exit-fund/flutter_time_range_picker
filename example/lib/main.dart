@@ -63,6 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () async {
             TimeRange result = await showTimeRangePicker(
               context: context,
+              use24HourFormat: true,
+              fromTextStyle: TextStyle(color: Colors.white, fontSize: 28),
             );
             print("result " + result.toString());
           },
